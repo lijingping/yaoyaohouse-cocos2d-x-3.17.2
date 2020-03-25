@@ -1,8 +1,6 @@
-local CodeMap = require("app.constants.code_map")
+
 local VersionLayer = require("app.views.common.VersionLayer")
 local LoadingLayer = require("app.views.common.LoadingLayer")
-local CCBSearchView = require("app.views.searchView.CCBSearchView")
-local CCBDebugButton = require("app.views.debugView.CCBDebugButton")
 --local CCBRevengeRequestPopup= require ("app.views.revengeView.CCBRevengeRequestPopup")
 
 -----------------------
@@ -14,9 +12,6 @@ function GameViewBase:onCreate()
     if self.init and type(self.init) == "function" then
         self:init()
     end
-
-    local debugBtn = CCBDebugButton:create():setLocalZOrder(1000)
-    self:addContent(debugBtn)
 end
 
 -- call every frame
@@ -30,11 +25,7 @@ end
 
 -- 弹出战舰搜索动画弹窗
 function GameViewBase:popSearchView()
-    -- if self.m_ccbSearchView == nil then
-        self.m_ccbSearchView = CCBSearchView:create()
-        self:addContent(self.m_ccbSearchView)
-        -- self.m_ccbSearchView:startSearch(time)
-    -- end
+
 end
 
 --弹出复仇请求

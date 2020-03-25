@@ -5,7 +5,8 @@ local fileName = "electronicInvoice.csv"
 local filePath = writablePath .. fileName
 
 local CCBLoginView = class("CCBLoginView", function ()
-	return CCBLoader("ccbi/loginView/CCBLoginView.ccbi")
+	--return CCBLoader("ccbi/loginView/CCBLoginView.ccbi")
+	return cc.Layer:create()
 end)
 
 function CCBLoginView:ctor()
