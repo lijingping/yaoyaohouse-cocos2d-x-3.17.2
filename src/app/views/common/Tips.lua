@@ -16,7 +16,7 @@ function Tips:ctor(str)
 		return;
 	end
 
-	local tipSprite = cc.Sprite:create("res/resources/common/ui_hint_frame2.png");
+	local tipSprite = cc.Sprite:create("ui_hint_frame2.png");
 	tipSprite:setPosition(cc.p(0, 5));
 	self:addChild(tipSprite);
 

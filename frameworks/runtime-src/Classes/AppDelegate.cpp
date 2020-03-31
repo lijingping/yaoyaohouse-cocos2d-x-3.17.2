@@ -336,13 +336,13 @@ int toLua_AppDelegate_CSVReaderLine(lua_State* tolua_S)
         const char* destPath = lua_tostring(tolua_S, 1);
         const char* code = lua_tostring(tolua_S, 2);
         
-        const MAP_CONTENT &ContentMap = CSVReader::getInst()->getContentMap(destPath);
+        const MAP_LINE &ContentMap = CSVReader::getInst()->getContentSrcMap(destPath);
         if (ContentMap.size() <= 0)
         {
-            CSVReader::getInst()->parse(destPath);
+            CSVReader::getInst()->parseSrc(destPath);
         }
 
-        std_map_string_string_to_luaval(tolua_S, CSVReader::getInst()->getLineMap(destPath, code));
+        lua_pushstring(tolua_S, CSVReader::getInst()->getLineSrcMap(destPath, code).c_str());
         return 1;
     }
     
@@ -352,20 +352,21 @@ int toLua_AppDelegate_CSVReaderLine(lua_State* tolua_S)
 int toLua_AppDelegate_CSVSaveLine(lua_State* tolua_S)
 {
     int argc = lua_gettop(tolua_S);
-    if (argc == 2)
+    if (argc == 3)
     {
         const char* destPath = lua_tostring(tolua_S, 1);
-        const char* line = lua_tostring(tolua_S, 2);
+        const char* key = lua_tostring(tolua_S, 2);
+        const char* line = lua_tostring(tolua_S, 3);
         
-        const MAP_CONTENT &ContentMap = CSVReader::getInst()->getContentMap(destPath);
-        if (ContentMap.size() <= 0)
-        {
-            CCLOG("toLua_AppDelegate_CSVSave no file is %d", destPath);
-        }
-        else
-        {
-            CSVReader::getInst()->saveCSVLine(destPath, line);
-        }
+        //const MAP_CONTENT &ContentMap = CSVReader::getInst()->getContentMap(destPath);
+        //if (ContentMap.size() <= 0)
+        //{
+           // CCLOG("toLua_AppDelegate_CSVSave no file is %d", destPath);
+        //}
+        //else
+        //{
+            CSVReader::getInst()->modifyCSVSrcLine(destPath, key, line);
+        //}
         
         return 1;
     }
