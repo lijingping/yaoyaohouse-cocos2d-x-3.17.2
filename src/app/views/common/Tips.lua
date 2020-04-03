@@ -4,7 +4,7 @@
 local Tips = class("Tips", cc.Node);
 
 function Tips:ctor(str)
-	if str == nil then
+	if str == nil or App:getRunningScene() == nil then
 		return;
 	end
 
@@ -16,12 +16,12 @@ function Tips:ctor(str)
 		return;
 	end
 
-	local tipSprite = cc.Sprite:create("ui_hint_frame2.png");
-	tipSprite:setPosition(cc.p(0, 5));
-	self:addChild(tipSprite);
+	--local tipSprite = cc.Sprite:create("ui_hint_frame2.png");
+	--tipSprite:setPosition(cc.p(0, 5));
+	--self:addChild(tipSprite);
 
 	local tipLabel = cc.LabelTTF:create();
-	tipLabel:setFontSize(20);
+	tipLabel:setFontSize(40);
 	tipLabel:setString(str);
 	self:addChild(tipLabel);
 

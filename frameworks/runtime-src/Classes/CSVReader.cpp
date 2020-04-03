@@ -6,6 +6,7 @@
 //
 
 #include "CSVReader.h"
+#include <stdio.h>
 #include <fstream>
 #include "cocos2d.h"
 

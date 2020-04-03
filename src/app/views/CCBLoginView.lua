@@ -61,6 +61,14 @@ function CCBLoginView:ctor()
 	end);
 
 	self:readLineByID()
+
+--[[
+	local date=string.split(os.date("%Y-%m-%d-%H-%M-%S"), "-");
+	--local date = os.date(“%Y-%m-%d %H:%M:%S”);
+	print("-----------------",os.date())
+	while(true) do
+	end
+	]]
 end
 
 function CCBLoginView:getNumber(name)
