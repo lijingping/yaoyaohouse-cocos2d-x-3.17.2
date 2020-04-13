@@ -12,6 +12,13 @@ local CCBLoginView = class("CCBLoginView", function ()
 end)
 
 function CCBLoginView:ctor()
+	local operateExcel = require("operateExcel")
+	operateExcel:loadCsvFile(filePath)
+	operateExcel:addLineStr("306-2020/04/13",{
+		ID="306-2020/04/13",houseID=306,price=45,lastElectric=69,curElectric=96,
+		lastWater=9,curWater=7,net=1,date="2020年2月24号",lastValue=500,curValue=63,
+		desc = "以后发电子收据，需要纸质收据说下 黄秀美"})
+
 	if fileUtils:isFileExist(filePath) == false and fileUtils:createDirectory(writablePath) then
 		if copyFile(fileName) then
 			print("-----------create file success,path=", filePath)
