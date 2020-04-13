@@ -1,0 +1,100 @@
+<Solution>
+  <PropertyGroup Name="NewCocosProject" Version="3.10.0.0" Type="CocosStudio" />
+  <SolutionFolder>
+    <Group ctype="ResourceGroup">
+      <RootFolder Name=".">
+        <Folder Name="ccbi">
+          <Folder Name="loginView">
+            <Project Name="CCBDemoBattlePreView.csd" Type="Scene" />
+          </Folder>
+        </Folder>
+        <Folder Name="resources">
+          <Folder Name="common">
+            <Image Name="btn2_green_h.png" />
+            <Image Name="btn2_green_n.png" />
+          </Folder>
+          <Folder Name="demo">
+            <File Name=".DS_Store" />
+            <Image Name="1.png" />
+            <Image Name="10.png" />
+            <Image Name="2-1.png" />
+            <Image Name="3-1.png" />
+            <Image Name="4-1.png" />
+            <Image Name="5-1.png" />
+            <Image Name="6-1.png" />
+            <Image Name="7-1.png" />
+            <Image Name="8-1.png" />
+            <Image Name="9-1.png" />
+            <Image Name="arrow_guide_130_0_130_0.png" />
+            <Image Name="arrow_guide_part1.png" />
+            <Image Name="effect.png" />
+            <Image Name="info.jpg" />
+            <Image Name="production_time1.png" />
+            <Image Name="production_time2.png" />
+            <Image Name="pvp_energy_part1.png" />
+            <Image Name="pvp_energy_part2.png" />
+            <Image Name="pvp_energy_part3.png" />
+            <Image Name="pvp_energy_part4.png" />
+            <Image Name="pvp_energy_part5.png" />
+            <Image Name="pvp_hp_level1.png" />
+            <Image Name="pvp_hp_level2.png" />
+            <Image Name="pvp_hp_level3.png" />
+            <Image Name="pvp_plane_box1.png" />
+            <Image Name="pvp_plane_box2.png" />
+            <Image Name="pvp_plane_box3.png" />
+            <Image Name="pvp_plane_box4.png" />
+            <Image Name="pvp_plane_box5.png" />
+            <Image Name="pvp_plane_box6.png" />
+            <Image Name="pvp_plane_hp1.png" />
+            <Image Name="pvp_plane_hp2.png" />
+            <Image Name="pvp_plane_hp3.png" />
+            <Image Name="pvp_plane_into.png" />
+            <Image Name="pvp_plane_level1.png" />
+            <Image Name="pvp_plane_level2.png" />
+            <Image Name="pvp_plane_level3.png" />
+            <Image Name="pvp_preview_part1.png" />
+            <Image Name="pvp_preview_part2.png" />
+            <Image Name="pvp_preview_part3.png" />
+            <Image Name="pvp_preview_part4.png" />
+            <Image Name="pvp_props_box1.png" />
+            <Image Name="pvp_text1_bp1.png" />
+            <Image Name="pvp_text1_bp2.png" />
+            <Image Name="pvp_time1.png" />
+            <Image Name="pvp_ui_part1.png" />
+          </Folder>
+          <Folder Name="font">
+            <Image Name="ui_ common_font0012.png" />
+            <Image Name="ui_ common_font0013.png" />
+            <Fnt Name="ui_font.fnt" />
+            <Image Name="ui_repository_font0001.png" />
+            <Image Name="ui_repository_font0002.png" />
+            <Image Name="ui_repository_font0003.png" />
+            <Image Name="ui_repository_font0004.png" />
+            <Image Name="ui_repository_font0005.png" />
+            <Image Name="ui_repository_font0006.png" />
+            <Image Name="ui_repository_font0007.png" />
+            <Image Name="ui_repository_font0008.png" />
+            <Image Name="ui_repository_font0009.png" />
+            <Image Name="ui_repository_font0010.png" />
+            <Image Name="ui_repository_font0011.png" />
+          </Folder>
+          <Folder Name="loginView">
+            <Image Name="login_button_h.png" />
+            <Image Name="login_button_n.png" />
+            <Image Name="login_font1.png" />
+            <Image Name="login_font2.png" />
+            <Image Name="login_input.png" />
+            <Image Name="login_input_btn.png" />
+            <Image Name="login_logo.png" />
+            <Image Name="ui_login1_bg1.png" />
+          </Folder>
+        </Folder>
+        <Image Name="bill.png" />
+        <Project Name="BillView.csd" Type="Scene" />
+        <Image Name="HelloWorld.png" />
+        <Project Name="MainScene.csd" Type="Scene" />
+        <Image Name="zhifubao.png" />
+      </RootFolder>
+    </Group>
+  </SolutionFolder>
+</Solution>
