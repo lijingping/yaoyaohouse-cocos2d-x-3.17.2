@@ -5,9 +5,11 @@ if CC_ENABLE_HOT_UPDATE then
 	cc.FileUtils:getInstance():addSearchPath(savepath.."src", true);
 	cc.FileUtils:getInstance():addSearchPath(savepath, true);
 end
-------------------------
--- 定义MyApp，继承AppBase
-------------------------
+
+BILL_DATA_NAME = "src/BillData.lua"
+BILL_DATA_LUA = "src.BillData"
+BillData = require(BILL_DATA_LUA)
+
 local MyApp = class("MyApp", cc.load("mvc").AppBase)
 
 function MyApp:onCreate()

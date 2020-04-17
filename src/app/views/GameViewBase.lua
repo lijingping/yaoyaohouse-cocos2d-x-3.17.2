@@ -1,6 +1,6 @@
 
-local VersionLayer = require("app.views.common.VersionLayer")
-local LoadingLayer = require("app.views.common.LoadingLayer")
+--local VersionLayer = require("app.views.common.VersionLayer")
+--local LoadingLayer = require("app.views.common.LoadingLayer")
 --local CCBRevengeRequestPopup= require ("app.views.revengeView.CCBRevengeRequestPopup")
 
 -----------------------

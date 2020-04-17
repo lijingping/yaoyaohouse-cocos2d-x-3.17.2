@@ -1,6 +1,6 @@
 local Tips = require("app.views.common.Tips");
-local LoadingLayer = require("app.views.common.LoadingLayer");
-local MessageHint = require("app.views.common.MessageHint");
+--local LoadingLayer = require("app.views.common.LoadingLayer");
+--local MessageHint = require("app.views.common.MessageHint");
 
 ---------------------
 -- Scene(场景)基类

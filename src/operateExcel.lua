@@ -1,8 +1,8 @@
 
 local fileUtils = cc.FileUtils:getInstance()
+local string_split = string.split
 
 local operateExcel = {}
-operateExcel._data = {}
 
 --读取文件内容，返回一个字符串
 function operateExcel:getFile(file_name)
@@ -21,13 +21,14 @@ end
 function operateExcel:loadCsvFile(filePath)
     -- 读取文件
     self._filePath = filePath
-    self._excel = self:getFile(filePath)--fileUtils:getStringFromFile(filePath)
+    self._excel = fileUtils:getStringFromFile(filePath)--self:getFile(filePath)
 
     -- 按行划分
-    self._lineStrTable = self:split(self._excel, '\n\r')
-    self._titleStrTable = self:split(self._lineStrTable[1], ",")
-    --dump(self._excel)
-    --dump(self._lineStrTable)
+    self._lineStrTable = string_split(self._excel, '\n')
+    self._titleStrTable = string_split(self._lineStrTable[1], ",")
+    self._data = {}
+    dump(self._excel)
+    dump(self._lineStrTable)
     --dump(self._titleStrTable)
 end
 
@@ -41,12 +42,12 @@ function operateExcel:getLineStrTable(key)
     if self._data[key] == nil then
     	self._data[key] = {}
     else
-        return self._data[key]
+        return self._data[key] or {}
     end
 
     for i=#self._lineStrTable,1 -1 do
         -- 一行中，每一列的内容
-        local content = self:split(self._lineStrTable[i], ",");
+        local content = string_split(self._lineStrTable[i], ",");
 
         -- 以标题作为索引，保存每一列的内容，取值的时候这样取：arrs[1].Title
         for j = 1, #self._titleStrTable do
@@ -60,7 +61,7 @@ function operateExcel:getLineStrTable(key)
     return self._data[key]
 end
 
-function operateExcel:addLineStr(key, lineStrTable)
+function operateExcel:addLineStr(key, lineStr)
 	--[[
 	    从第3行开始保存（第一行是标题，第二行是注释，后面的行才是内容） 
 
@@ -71,17 +72,34 @@ function operateExcel:addLineStr(key, lineStrTable)
     	self._data[key] = {}
     end
 
-    local content = lineStrTable[self._titleStrTable[1]]
- 	for j = 2, #self._titleStrTable, 1 do
-        content = content .. "," .. lineStrTable[self._titleStrTable[j]]
+    local lineStrTable = {}
+    local lineStrSpilt = string_split(lineStr, ",")
+    --dump(lineStrSpilt)
+ 	for j = 1, #self._titleStrTable do
+        lineStrTable[self._titleStrTable[j]] = lineStrSpilt[j]
     end
     self._data[key] = clone(lineStrTable)
-    self._lineStrTable[#self._lineStrTable] = content
-    self._excel = self._excel .. content
+    self._lineStrTable[#self._lineStrTable+1] = lineStr
+    self._excel = self._excel .. lineStr
 
-    --dump(self._excel)
-
+    dump(lineStrTable)
+    dump(self._excel)
+    print("111111111self._filePath=", self._filePath)
+--[[
     fileUtils:writeStringToFile(self._excel, self._filePath)
+]]
+    local file = io.open(self._filePath, "wb+")
+
+    file:write(self._lineStrTable[1])
+    for i=2,#self._lineStrTable do
+        file:write("\n")
+        file:write(self._lineStrTable[i])
+    end
+
+    --file:write(self._excel)
+    io.close(file)
+
+    --self._excel = self._excel .. '\n\r'
 end
 
 return operateExcel
