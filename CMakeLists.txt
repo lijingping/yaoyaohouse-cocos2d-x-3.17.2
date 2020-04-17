@@ -71,7 +71,7 @@ set(GAME_SOURCE
     ${RUNTIME_SRC_ROOT}/Classes/src/MCKernel.cpp
     ${RUNTIME_SRC_ROOT}/Classes/src/MobileClientKernel.cpp
     ${RUNTIME_SRC_ROOT}/Classes/src/UnZipAsset.cpp
-
+)
 # sources need to compile info, include dirs and source files
 include_directories(
         ${RUNTIME_SRC_ROOT}/Classes
