@@ -27,8 +27,8 @@ function operateExcel:loadCsvFile(filePath)
     self._lineStrTable = string_split(self._excel, '\n')
     self._titleStrTable = string_split(self._lineStrTable[1], ",")
     self._data = {}
-    dump(self._excel)
-    dump(self._lineStrTable)
+    --dump(self._excel)
+    --dump(self._lineStrTable)
     --dump(self._titleStrTable)
 end
 
@@ -38,11 +38,9 @@ function operateExcel:getLineStrTable(key)
 
 	    用二维数组保存：arr[ID][属性标题字符串]
 	]]
-
+print("7677777777",key)
     if self._data[key] == nil then
     	self._data[key] = {}
-    else
-        return self._data[key] or {}
     end
 
     for i=#self._lineStrTable,1 -1 do
@@ -53,11 +51,13 @@ function operateExcel:getLineStrTable(key)
         for j = 1, #self._titleStrTable do
             self._data[key][self._titleStrTable[j]] = content[j]
             if self._data[key] then
+dump(self._data[key])
                 return self._data[key]
             end
         end
     end
 
+dump(self._data[key])
     return self._data[key]
 end
 
@@ -80,23 +80,23 @@ function operateExcel:addLineStr(key, lineStr)
     end
     self._data[key] = clone(lineStrTable)
     self._lineStrTable[#self._lineStrTable+1] = lineStr
-    self._excel = self._excel .. lineStr
+    self._excel = self._excel .. lineStr .. '\n'
 
     dump(lineStrTable)
-    dump(self._excel)
-    print("111111111self._filePath=", self._filePath)
---[[
-    fileUtils:writeStringToFile(self._excel, self._filePath)
-]]
-    local file = io.open(self._filePath, "wb+")
+    --dump(self._excel)
+    --print("111111111self._filePath=", self._filePath)
+
+    --fileUtils:writeStringToFile(self._excel, self._filePath)
+
+    local file = io.open(self._filePath, "w")
 
     file:write(self._lineStrTable[1])
     for i=2,#self._lineStrTable do
-        file:write("\n")
-        file:write(self._lineStrTable[i])
+         file:write("\n")
+         file:write(self._lineStrTable[i])
     end
 
-    --file:write(self._excel)
+    -- --file:write(self._excel)
     io.close(file)
 
     --self._excel = self._excel .. '\n\r'

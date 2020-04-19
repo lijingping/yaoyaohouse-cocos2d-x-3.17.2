@@ -7,7 +7,7 @@ local HelpView = class("HelpView", function ()
 	return cc.CSLoader:createNode("HelpView.csb")
 end)
 
-function HelpView:ctor(params)
+function HelpView:ctor()
 	self.Panel_bg = self:getChildByName("Panel_bg")
 	dump(BillData)
 	self._node = {}
@@ -64,10 +64,11 @@ function HelpView:ctor(params)
             if self._desc["houseNo"]:getText() == "" or self._desc["date"]:getText() == "" then
 				return Tips:create("请填入房间号/日期")
             end
-			params.mainView:findLineStr()
 
-			self:setVisible(false)
-			--self:setTouchEnabled(false)
+			print("555555555555555555555555555,=",self._desc["houseNo"]:getText().."-"..self._desc["date"]:getText())
+			App:enterScene("MainScene"):getViewBase().m_ccbMainView
+			m_ccbMainView:readLineByID(nil,self._desc["houseNo"]:getText().."-"..self._desc["date"]:getText())
+
 		end
 	end)
 
@@ -75,7 +76,7 @@ function HelpView:ctor(params)
 		if event == ccui.TouchEventType.ended then
 			self:writeConfigfile(writablePath)
 
-			self:removeSelf()
+			App:enterScene("MainScene")
 		end
 	end)
 

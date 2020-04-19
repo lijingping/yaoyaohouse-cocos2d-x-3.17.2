@@ -92,7 +92,7 @@ function MainView:ctor(params)
 
 	self.Panel_bg:getChildByName("help"):addTouchEventListener(function(sender, event)
 		if event == ccui.TouchEventType.ended then
-            require("app.views.HelpView"):create({mainView=self}):addTo(display.getRunningScene())
+            App:enterScene("HelpScene")
 		end
 	end);
 
@@ -103,7 +103,6 @@ function MainView:ctor(params)
 		end
 	end);
 
-    self:findLineStr();
 	--self:readLineByID(params.str, params.id)
 
 --[[
@@ -113,6 +112,13 @@ function MainView:ctor(params)
 	while(true) do
 	end
 	]]
+
+	self:enableNodeEvents();
+end
+
+function MainView:onEnter()
+	print("-----------------MainView:onEnter----------------")
+    self:findLineStr();
 end
 
 function MainView:getNumber(name)
@@ -203,6 +209,7 @@ function MainView:createEditBox(nodeName)
 end
 
 function MainView:readLineByID(str,id,isBill)
+	print("666666666666666666666666666666,=",str)
 	self._id = id or (self._node["houseNo"]:getText() .. "-" .. self._node["date"]:getText())
 	local lineStr = str or operateExcel:getLineStrTable(self._id)--CSVReaderLine(filePath, self._id)
 	if TABLE_NUMS(lineStr) <= 0 then
@@ -212,7 +219,7 @@ function MainView:readLineByID(str,id,isBill)
 
 	Tips:create("找到数据")
 
-	dump(lineStr)
+	--dump(lineStr)
 
 	for i,v in pairs(self._node) do
 		if lineStr[i] then
@@ -261,10 +268,10 @@ function MainView:saveLine()
 
  	self.m_line = tostring(table.concat(self.m_line))
 
- 	dump(self.m_line)
+ 	--dump(self.m_line)
 
-	--operateExcel:addLineStr(self._id, self.m_line)
-	CSVSaveLine(filePath, self._id, self.m_line)
+	operateExcel:addLineStr(self._id, self.m_line)
+	--CSVSaveLine(filePath, self._id, self.m_line)
 end
 
 function MainView:getLastDay(dataTable)
@@ -279,27 +286,32 @@ function MainView:getLastDay(dataTable)
 end
 
 function MainView:findLineStr()
-    local sign = "/"
-	local date = OS_DATE("%Y"..sign.."%m"..sign.."%d")
-	local dataTable = self:getLastDay(string.split(date, sign))
-    dataTable[2] = tonumber(dataTable[2])
-    dataTable[3] = tonumber(dataTable[3])
+	print("-----------------MainView:findLineStr----------------")
+	--if self._id then
+		return self:readLineByID(nil,"306-2020/04/10")
+	-- end
 
-    local day = dataTable[3]
-    local houseNo = BillData[day] or {}
-    local str = ""
-	for i=1,#houseNo do
-		str = operateExcel:getLineStrTable(houseNo[i] .. "-" ..date)--CSVReaderLine(filePath, houseNo[i] .. "-" ..date)
-		if TABLE_NUMS(str) <= 0 then--未开单
-		    str = operateExcel:getLineStrTable(houseNo[i] .. "-" .. dataTable[1]..sign..dataTable[2]..sign..day)--CSVReaderLine(filePath, houseNo[i] .. "-" .. dataTable[1]..sign..dataTable[2]..sign..day)
-            self:readLineByID(str,nil,true)
-        else--已开单
-		    if str[2] == "1" then--已收钱
-            else--没收钱
-            end
-			self:readLineByID(str)
-		end
-    end
+ --    local sign = "/"
+	-- local date = OS_DATE("%Y"..sign.."%m"..sign.."%d")
+	-- local dataTable = self:getLastDay(string.split(date, sign))
+ --    dataTable[2] = tonumber(dataTable[2])
+ --    dataTable[3] = tonumber(dataTable[3])
+
+ --    local day = dataTable[3]
+ --    local houseNo = BillData[day] or {}
+ --    local str = ""
+	-- for i=1,#houseNo do
+	-- 	str = operateExcel:getLineStrTable(houseNo[i] .. "-" ..date)--CSVReaderLine(filePath, houseNo[i] .. "-" ..date)
+	-- 	if TABLE_NUMS(str) <= 0 then--未开单
+	-- 	    str = operateExcel:getLineStrTable(houseNo[i] .. "-" .. dataTable[1]..sign..dataTable[2]..sign..day)--CSVReaderLine(filePath, houseNo[i] .. "-" .. dataTable[1]..sign..dataTable[2]..sign..day)
+ --            self:readLineByID(str,nil,true)
+ --        else--已开单
+	-- 	    if str[2] == "1" then--已收钱
+ --            else--没收钱
+ --            end
+	-- 		self:readLineByID(str)
+	-- 	end
+ --    end
 end
 
 return MainView

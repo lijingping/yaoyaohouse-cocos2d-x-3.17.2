@@ -23,6 +23,7 @@ function Tips:ctor(str)
 	local tipLabel = cc.LabelTTF:create();
 	tipLabel:setFontSize(40);
 	tipLabel:setString(str);
+	tipLabel:setColor(cc.c3b(255,0,0));
 	self:addChild(tipLabel);
 
 	self:setCascadeOpacityEnabled(true);
