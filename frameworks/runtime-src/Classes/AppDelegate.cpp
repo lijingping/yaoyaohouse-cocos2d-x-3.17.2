@@ -55,6 +55,7 @@ using namespace cocos2d::experimental;
 #endif
 
 #include "CSVReader.h"
+#include "QrNode.h"
 
 USING_NS_CC;
 using namespace std;
@@ -416,6 +417,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     //register_custom_function(stack->getLuaState());
 
     register_all_pomelo(L);
+    register_all_QrNode();
     
 #if CC_64BITS
     FileUtils::getInstance()->addSearchPath("src/64bit");

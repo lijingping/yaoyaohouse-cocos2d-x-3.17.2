@@ -113,8 +113,23 @@ function MainView:ctor(params)
 
 	self.Panel_bg:getChildByName("shoot"):addTouchEventListener(function(sender, event)
 		if event == ccui.TouchEventType.ended then
+			local houseNoTable = string_split(self._node["houseNo"]:getText(),"-") or {}
+			local filePath = houseNoTable[1] .. OS_DATE("_%Y_%m_%d_%H_%M_%S.png")
+			--第1种方法
+			Utils:popupTouchFilter(0, false)
+            captureScreenWithArea(area, filePath, function(ok, savepath)         
+                if ok then
+	    			local luaj = require "cocos.cocos2d.luaj"
+			   		local ok,ret = luaj.callStaticMethod("org/cocos2dx/lua/AppActivity"
+			   			,"saveImgToSystemGallery",{savepath, filePath},"(Ljava/lang/String;Ljava/lang/String;)V")
+
+                end
+                self:runAction(cc.Sequence:create(cc.DelayTime:create(3), cc.CallFunc:create(function()
+                    Utils:dismissTouchFilter()
+                end)))
+            end)
+			--第2种方法
 			local luaj = require "cocos.cocos2d.luaj"
-			local filePath = self._node["houseNo"]:getText() .. OS_DATE("_%Y_%m_%d_%H_%M_%S.png")
 	   		local ok,ret = luaj.callStaticMethod("org/cocos2dx/lua/AppActivity"
 	   			,"shoot",{filePath},"(Ljava/lang/String;)V")
 		end
