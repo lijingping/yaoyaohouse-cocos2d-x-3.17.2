@@ -18,7 +18,7 @@ function Tips:ctor(str)
 	--tipSprite:setPosition(cc.p(0, 5));
 	--self:addChild(tipSprite);
 
-	local tipLabel = cc.Label:createWithTTF("font/SIMYOU.TTF", "font/SIMYOU.TTF", 40)--cc.LabelTTF:create();
+	local tipLabel = cc.Label:createWithTTF("font/simhei.ttf", "font/simhei.ttf", 40)--cc.LabelTTF:create();
 	--tipLabel:setFontSize(40);
 	tipLabel:setString(str)
 		:setColor(cc.c3b(255, 0, 0));
