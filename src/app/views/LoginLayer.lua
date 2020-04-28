@@ -1,22 +1,94 @@
 
-local Tips = require("app.views.common.Tips");
+local MAX_DOOR = 6
+local YES = "✔"
+local NO = "□"
+
+local fileUtils = cc.FileUtils:getInstance()
 
 local LoginView = class("LoginView", function ()
 	return cc.CSLoader:createNode("LoginView.csb")
 end)
 
 function LoginView:ctor(callBack)
+	local BillDataFile = WRITABLE_PATH .. BILL_DATA_NAME
+	if fileUtils:isFileExist(BillDataFile) == false and fileUtils:createDirectory(WRITABLE_PATH) then
+		if copyFile(BILL_DATA_NAME) then
+			print("-----------create file success,path=", BillDataFile)
+		end
+	end
+
+	if (not BillData.deleteData or fileUtils:isFileExist(BILL_CSV) == false)
+	and fileUtils:createDirectory(WRITABLE_PATH) then
+		if copyFile(BILL_CSV_NAME) then
+			print("-----------create file success,path=", BILL_CSV)
+
+			BillData.deleteData = true
+			Utils:writeConfigfile()
+		end
+	end
+
 	self:init()
 
 	self.callBack = callBack
 	
 	self.Panel_bg:getChildByName("login"):addTouchEventListener(function(sender, event)
 		if event == ccui.TouchEventType.ended then
-			if self.editName:getText() ~= "yaoyao" and self.editPassword:getText() ~= "Zyj112020" then
-				return Tips:create("账号或密码错误，请重新输入")
-			end
+			if self.editName:getText() == "yaoyao" and self.editPassword:getText() == "Zyj112020" then
+				BillData.user = self.isRemember and self.editName:getText() or nil
+				BillData.pwd = self.isRemember and self.editPassword:getText() or nil
+				Utils:writeConfigfile()
 
-			App:enterScene("MainScene")
+				App:enterScene("MainScene")
+			end
+			return Tips:create("账号或密码错误，请重新输入")
+		end
+	end);
+
+	local rememberBtn = self.Panel_bg:getChildByName("rememberBtn")
+	if BillData.user and BillData.pwd then
+		self.editName:setText(BillData.user or "")
+		self.editPassword:setText(BillData.pwd or "")
+		rememberBtn:setTitleText(YES)
+		self.isRemember = true
+	else
+		rememberBtn:setTitleText(NO)
+		self.isRemember = false
+	end
+	rememberBtn:addTouchEventListener(function(sender, event)
+		if event == ccui.TouchEventType.ended then
+			self.isRemember = not self.isRemember
+			rememberBtn:setTitleText(self.isRemember and YES or NO)
+			
+			BillData.user = self.isRemember and self.editName:getText() or nil
+			BillData.pwd = self.isRemember and self.editPassword:getText() or nil
+
+			Utils:writeConfigfile()
+		end
+	end);
+	
+	local loginBtn = self.Panel_bg:getChildByName("loginBtn")
+	loginBtn:setTitleText(BillData.isLogin and YES or NO)
+	loginBtn:addTouchEventListener(function(sender, event)
+		if event == ccui.TouchEventType.ended then
+			BillData.isLogin = not BillData.isLogin
+			loginBtn:setTitleText(BillData.isLogin and YES or NO)
+
+			Utils:writeConfigfile()
+		end
+	end);
+
+	local door = self.Panel_bg:getChildByName("door")
+	local doorRes = "door%d.jpg"
+	door:setTexture(string.format(doorRes, BillData.door))
+	self.Panel_bg:getChildByName("change"):addTouchEventListener(function(sender, event)
+		if event == ccui.TouchEventType.ended then
+			BillData.door = BillData.door + 1
+			if BillData.door > MAX_DOOR then
+				BillData.door = 1
+			end
+			door:setTexture(string.format(doorRes, BillData.door))
+
+			Utils:writeConfigfile()
 		end
 	end);
 end
@@ -43,7 +115,7 @@ function LoginView:init()
     editName:setPlaceHolder("请输入账号")
     editName:setPlaceholderFontColor(cc.c3b(128,128,128))
     editName:setMaxLength(16)
-    editName:setText("yaoyao")
+    editName:setText("")
     
 	local function editBoxTextEventHandle(stringEventName, pSender)
 		if stringEventName == "changed" then
@@ -58,7 +130,6 @@ function LoginView:init()
     editName:setInputMode(cc.EDITBOX_INPUT_MODE_EMAILADDR)
     editName:setInputFlag(cc.EDITBOX_INPUT_FLAG_INITIAL_CAPS_WORD)
 
-   
 	local editPassword = ccui.EditBox:create(size, passwordBox, nil, nil)
 	editPassword:setPosition(size.width * 0.5, size.height * 0.5);
     editPassword:setFontSize(28)
@@ -70,7 +141,7 @@ function LoginView:init()
     editPassword:setReturnType(cc.KEYBOARD_RETURNTYPE_DONE)
     editPassword:setInputMode(cc.EDITBOX_INPUT_MODE_SINGLELINE)
     editPassword:setInputFlag(cc.EDITBOX_INPUT_FLAG_PASSWORD)
-    editPassword:setText("Zyj112020")
+    editPassword:setText("")
 
 
     nameBg:addChild(editName)

@@ -173,4 +173,47 @@ function Utils:calcCharacterLength_UTF8(ch)
 	end
 end
 
+function Utils:writeConfigfile(data, path, mode)
+    path = path or WRITABLE_PATH .. BILL_DATA_NAME
+
+    local file = io.open(path, mode or "w")
+    file:write("return {")
+    file:write("\n  ")
+
+    for i=1,31 do
+        local houseNo = BillData[i]
+        if houseNo then
+            file:write("[" .. i .. "] = {")
+
+            file:write(houseNo[1])
+            for i=2,#houseNo do
+                file:write(","..houseNo[i])
+            end
+
+            file:write("},")
+            file:write("\n  ")
+        end
+    end
+
+    file:write("[\"isLogin\"]=" .. (BillData.isLogin and "true" or "false"))
+    file:write(",\n  ")
+    file:write("[\"door\"]=" .. BillData.door)
+
+    if BillData.user and BillData.pwd then
+        file:write(",\n  ")
+        file:write("[\"user\"]=" .. "\"" .. BillData.user .. "\"")
+        file:write(",\n  ")
+        file:write("[\"pwd\"]=" ..  "\"" .. BillData.pwd .. "\"")
+    end
+
+    file:write(",\n  ")
+    file:write("[\"deleteData\"]=" .. (BillData.deleteData and "true" or "false"))
+
+    file:write("\n}")
+    io.close(file)
+
+    package.loaded[BILL_DATA_LUA] = nil
+    BillData = require(BILL_DATA_LUA)
+end
+
 return Utils

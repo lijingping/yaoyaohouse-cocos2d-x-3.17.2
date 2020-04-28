@@ -29,8 +29,15 @@ package org.cocos2dx.lua;
 import android.os.Bundle;
 import android.content.Intent;
 import android.net.Uri;
+import android.graphics.Bitmap;
+import android.graphics.Rect;
+import android.view.View;
+import android.provider.MediaStore;
 import org.cocos2dx.lib.Cocos2dxActivity;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class AppActivity extends Cocos2dxActivity{
     static AppActivity  instance;
@@ -90,5 +97,92 @@ public class AppActivity extends Cocos2dxActivity{
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);  
         startActivity(i);
         android.os.Process.killProcess(android.os.Process.myPid());
+    }
+    public static Intent getExcelFileIntent(String Path)  
+    {  
+        File file = new File(Path);  
+        Intent intent = new Intent("android.intent.action.VIEW");  
+        intent.addCategory("android.intent.category.DEFAULT");  
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);  
+        Uri uri = Uri.fromFile(file);  
+        intent.setDataAndType(uri, "text/csv");  
+        return intent;  
+    }
+
+    // 获取指定Activity的截屏，保存到png文件
+    public static Bitmap takeScreenShot(AppActivity activity) {
+        // View是你需要截图的View
+        View view = activity.getWindow().getDecorView();
+        view.setDrawingCacheEnabled(true);
+        view.buildDrawingCache();
+        Bitmap b1 = view.getDrawingCache();
+ 
+        // 获取状态栏高度
+        Rect frame = new Rect();
+        activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
+        int statusBarHeight = frame.top;
+ 
+        // 获取屏幕长和高
+        int width = activity.getWindowManager().getDefaultDisplay().getWidth();
+        int height = activity.getWindowManager().getDefaultDisplay()
+                .getHeight();
+        // 去掉标题栏
+        // Bitmap b = Bitmap.createBitmap(b1, 0, 25, 320, 455);
+        Bitmap b = Bitmap.createBitmap(b1, 0, statusBarHeight, width, height
+                - statusBarHeight);
+        view.destroyDrawingCache();
+        return b;
+    }
+ 
+    // 保存到sdcard
+    public static void savePic(Bitmap b, String strFileName) {
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(strFileName);
+            if (null != fos) {
+                b.compress(Bitmap.CompressFormat.PNG, 90, fos);
+                fos.flush();
+                fos.close();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //保存图片到系统相册
+    public static boolean saveImgToSystemGallery(final String path, final String filename)
+    {
+        boolean bRes = false;
+        // 文件插入系统图库
+        try 
+        {
+            MediaStore.Images.Media.insertImage(instance.getContentResolver(), path, filename, null);
+            // 最后通知图库更新
+            instance.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + path)));
+            bRes = true;
+        } 
+        catch (FileNotFoundException e) 
+        {
+            e.printStackTrace();
+        }
+        return bRes;
+    }
+ 
+    // 程序入口
+    public static void shoot(final String path, final String filename) {
+        savePic(takeScreenShot(instance), path + filename);
+        // 最后通知图库更新
+        instance.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + path)));
+
+        Intent intent  = new Intent(Intent.ACTION_SEND);
+        File file = new File(path + filename);
+        intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
+        intent.setType("image/jpeg");
+        Intent chooser = Intent.createChooser(intent, "Share screen shot");
+        if(intent.resolveActivity(instance.getPackageManager()) != null){
+            instance.startActivity(chooser);
+        }
     }
 }
