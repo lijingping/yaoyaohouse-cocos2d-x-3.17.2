@@ -57,6 +57,10 @@
 		B838374D24235ED6009AF43A /* DownAsset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838371424235ED5009AF43A /* DownAsset.cpp */; };
 		B838375A24235ED6009AF43A /* MobileClientKernel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838371B24235ED5009AF43A /* MobileClientKernel.cpp */; };
 		B838375B24235ED6009AF43A /* MobileClientKernel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838371B24235ED5009AF43A /* MobileClientKernel.cpp */; };
+		B87966DF24580588000C0FC0 /* QrNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87966DB24580588000C0FC0 /* QrNode.cpp */; };
+		B87966E024580588000C0FC0 /* QrNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87966DB24580588000C0FC0 /* QrNode.cpp */; };
+		B87966E32458063B000C0FC0 /* QR_Encode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87966E12458063A000C0FC0 /* QR_Encode.cpp */; };
+		B87966E42458063B000C0FC0 /* QR_Encode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87966E12458063A000C0FC0 /* QR_Encode.cpp */; };
 		B89AF3A5242B365A0016A34D /* CSVReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B89AF3A3242B365A0016A34D /* CSVReader.cpp */; };
 		B89AF3A6242B365A0016A34D /* CSVReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B89AF3A3242B365A0016A34D /* CSVReader.cpp */; };
 		B8D33E16241F0C44006F6173 /* lua_pomelo_auto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E11241F0C43006F6173 /* lua_pomelo_auto.cpp */; };
@@ -234,6 +238,10 @@
 		B838371324235ED5009AF43A /* UnZipAsset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UnZipAsset.cpp; sourceTree = "<group>"; };
 		B838371424235ED5009AF43A /* DownAsset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DownAsset.cpp; sourceTree = "<group>"; };
 		B838371B24235ED5009AF43A /* MobileClientKernel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MobileClientKernel.cpp; sourceTree = "<group>"; };
+		B87966DB24580588000C0FC0 /* QrNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = QrNode.cpp; path = ../Classes/QrNode.cpp; sourceTree = "<group>"; };
+		B87966DE24580588000C0FC0 /* QrNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QrNode.h; path = ../Classes/QrNode.h; sourceTree = "<group>"; };
+		B87966E12458063A000C0FC0 /* QR_Encode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = QR_Encode.cpp; path = ../Classes/QR_Encode.cpp; sourceTree = "<group>"; };
+		B87966E22458063A000C0FC0 /* QR_Encode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QR_Encode.h; path = ../Classes/QR_Encode.h; sourceTree = "<group>"; };
 		B89AF3A3242B365A0016A34D /* CSVReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSVReader.cpp; path = ../Classes/CSVReader.cpp; sourceTree = "<group>"; };
 		B89AF3A4242B365A0016A34D /* CSVReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSVReader.h; path = ../Classes/CSVReader.h; sourceTree = "<group>"; };
 		B8D33E0C241F0C43006F6173 /* CCPomelo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCPomelo.h; path = ../Classes/CCPomelo.h; sourceTree = "<group>"; };
@@ -503,6 +511,10 @@
 		F293BB7C15EB830F00256477 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B87966E12458063A000C0FC0 /* QR_Encode.cpp */,
+				B87966E22458063A000C0FC0 /* QR_Encode.h */,
+				B87966DB24580588000C0FC0 /* QrNode.cpp */,
+				B87966DE24580588000C0FC0 /* QrNode.h */,
 				B89AF3A3242B365A0016A34D /* CSVReader.cpp */,
 				B89AF3A4242B365A0016A34D /* CSVReader.h */,
 				B83836D924235ED5009AF43A /* include */,
@@ -724,12 +736,14 @@
 				B838374D24235ED6009AF43A /* DownAsset.cpp in Sources */,
 				B838373D24235ED6009AF43A /* ClientKernel.cpp in Sources */,
 				B838375B24235ED6009AF43A /* MobileClientKernel.cpp in Sources */,
+				B87966E024580588000C0FC0 /* QrNode.cpp in Sources */,
 				C07828FA18B4D72E00BD2287 /* SimulatorApp.mm in Sources */,
 				B8D33E17241F0C44006F6173 /* lua_pomelo_auto.cpp in Sources */,
 				5023813317EBBCE400990C9B /* AppDelegate.cpp in Sources */,
 				9FF504851A5E87B100AFDA55 /* ConsoleWindowController.m in Sources */,
 				B838373F24235ED6009AF43A /* MCKernel.cpp in Sources */,
 				C07828F818B4D72E00BD2287 /* main.m in Sources */,
+				B87966E42458063B000C0FC0 /* QR_Encode.cpp in Sources */,
 				B89AF3A6242B365A0016A34D /* CSVReader.cpp in Sources */,
 				B838374B24235ED6009AF43A /* UnZipAsset.cpp in Sources */,
 				B8D33E1D241F0C44006F6173 /* CCPomelo.cpp in Sources */,
@@ -743,12 +757,14 @@
 				B838374C24235ED6009AF43A /* DownAsset.cpp in Sources */,
 				B838373C24235ED6009AF43A /* ClientKernel.cpp in Sources */,
 				B838375A24235ED6009AF43A /* MobileClientKernel.cpp in Sources */,
+				B87966DF24580588000C0FC0 /* QrNode.cpp in Sources */,
 				5023812517EBBCAC00990C9B /* RootViewController.mm in Sources */,
 				B8D33E16241F0C44006F6173 /* lua_pomelo_auto.cpp in Sources */,
 				F293BB9C15EB831F00256477 /* AppDelegate.cpp in Sources */,
 				5023812417EBBCAC00990C9B /* main.m in Sources */,
 				B838373E24235ED6009AF43A /* MCKernel.cpp in Sources */,
 				5023811817EBBCAC00990C9B /* AppController.mm in Sources */,
+				B87966E32458063B000C0FC0 /* QR_Encode.cpp in Sources */,
 				B89AF3A5242B365A0016A34D /* CSVReader.cpp in Sources */,
 				B838374A24235ED6009AF43A /* UnZipAsset.cpp in Sources */,
 				B8D33E1C241F0C44006F6173 /* CCPomelo.cpp in Sources */,

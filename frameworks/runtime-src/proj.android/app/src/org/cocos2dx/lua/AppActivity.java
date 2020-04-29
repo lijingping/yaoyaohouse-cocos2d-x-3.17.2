@@ -98,9 +98,9 @@ public class AppActivity extends Cocos2dxActivity{
         startActivity(i);
         android.os.Process.killProcess(android.os.Process.myPid());
     }
-    public static Intent getExcelFileIntent(String Path)  
+    public static Intent getCsvFileIntent(String Path)  
     {  
-        File file = new File(Path);  
+        File file = new File(Path);
         Intent intent = new Intent("android.intent.action.VIEW");  
         intent.addCategory("android.intent.category.DEFAULT");  
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);  
