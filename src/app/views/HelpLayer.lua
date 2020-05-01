@@ -5,7 +5,7 @@ local HelpView = class("HelpView", function ()
 	return cc.CSLoader:createNode("HelpView.csb")
 end)
 
-function HelpView:ctor(params)
+function HelpView:ctor()
 	self.Panel_bg = self:getChildByName("Panel_bg")
 	--dump(BillData)
 	self._node = {}
@@ -62,17 +62,13 @@ function HelpView:ctor(params)
             if self._desc["houseNo"]:getText() == "" or self._desc["date"]:getText() == "" then
 				return Tips:create("请填入房间号/日期")
             end
-			params.mainView:readLineByID(nil, self._desc["houseNo"]:getText() .."-"..self._desc["date"]:getText())
-
-			self:removeSelf()
+			App:enterScene("MainScene"):getViewBase().m_ccbMainView._id = self._desc["houseNo"]:getText() .."-"..self._desc["date"]:getText()
 		end
 	end)
 
     self.Panel_bg:getChildByName("bill"):addTouchEventListener(function(sender, event)
 		if event == ccui.TouchEventType.ended then
-			params.mainView:findLineStr()
-
-			self:removeSelf()
+			App:enterScene("MainScene")
 		end
 	end)
 
@@ -80,7 +76,7 @@ function HelpView:ctor(params)
 		if event == ccui.TouchEventType.ended then
 			self:writeConfigfile()
 
-			self:removeSelf()
+			App:enterScene("MainScene")
 		end
 	end)
 
@@ -88,15 +84,18 @@ function HelpView:ctor(params)
     --self._desc["openFile"]:setTitleText("打开发票数据")
     self._desc["openFile"]:addTouchEventListener(function(sender, event)
 		if event == ccui.TouchEventType.ended then
-			local luaj = require "cocos.cocos2d.luaj"
-	   		local ok,ret = luaj.callStaticMethod("org/cocos2dx/lua/AppActivity"
-	   			,"getSDCardDocPath",{},"()Ljava/lang/String;")
+			if device.platform == "android" then
+				local luaj = require "cocos.cocos2d.luaj"
+		   		local ok,ret = luaj.callStaticMethod("org/cocos2dx/lua/AppActivity"
+		   			,"getSDCardDocPath",{},"()Ljava/lang/String;")
 
-			local SDCardDocPath = ret .. "/" .. BILL_CSV_NAME
-			Utils:copyFile(BILL_CSV, SDCardDocPath)
+				local SDCardDocPath = ret .. "/" .. BILL_CSV_NAME
+				cc.FileUtils:getInstance():removeFile(SDCardDocPath)
+				Utils:copyFile(BILL_CSV, SDCardDocPath)
 
-	   		luaj.callStaticMethod("org/cocos2dx/lua/AppActivity"
-	   			,"getCsvFileIntent",{SDCardDocPath},"(Ljava/lang/String;)V")
+		   		luaj.callStaticMethod("org/cocos2dx/lua/AppActivity"
+		   			,"getCsvFileIntent",{SDCardDocPath},"(Ljava/lang/String;)V")
+		   	end
 		end
 	end)
 

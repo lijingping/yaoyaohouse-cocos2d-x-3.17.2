@@ -92,6 +92,7 @@ function Utils:copyFile(srcFile, dstFile)
     local out = io.open(dstFile, "wb")
     out:write(data)
     out:close()
+    imp:close()
 end
 
 -- 二进制转字符串
@@ -216,33 +217,37 @@ function Utils:writeConfigfile(data, path, mode)
     BillData = require(BILL_DATA_LUA)
 end
 
+
 local TOUCH_FILTER_NAME = "__touch_filter_node_name__"
+local TouchFilter = class("TouchFilter", function(showTime, autohide, msg)
+    return display.newLayer(cc.c4b(0, 0, 0, 0))
+end)
 --触摸过滤
 function Utils:popupTouchFilter( showTime, autohide, msg, parent )
-	local filter = TouchFilter:create(showTime, autohide, msg)
-	local runScene = parent or cc.Director:getInstance():getRunningScene()
-	if nil ~= runScene then
-		local lastfilter = runScene:getChildByName(TOUCH_FILTER_NAME)
-		if nil ~= lastfilter then
-			lastfilter:stopAllActions()
-			lastfilter:removeFromParent()
-		end
-		if nil ~= filter then
-			filter:setName(TOUCH_FILTER_NAME)
-			runScene:addChild(filter, yl.ZORDER.Z_FILTER_LAYER)
-		end
-	end
+    local filter = TouchFilter:create(showTime, autohide, msg)
+    local runScene = parent or cc.Director:getInstance():getRunningScene()
+    if nil ~= runScene then
+        local lastfilter = runScene:getChildByName(TOUCH_FILTER_NAME)
+        if nil ~= lastfilter then
+            lastfilter:stopAllActions()
+            lastfilter:removeFromParent()
+        end
+        if nil ~= filter then
+            filter:setName(TOUCH_FILTER_NAME)
+            runScene:addChild(filter, 10000)
+        end
+    end
 end
 
 function Utils:dismissTouchFilter()
-	local runScene = cc.Director:getInstance():getRunningScene()
-	if nil ~= runScene then
-		local filter = runScene:getChildByName(TOUCH_FILTER_NAME)
-		if nil ~= filter then
-			filter:stopAllActions()
-			filter:removeFromParent()
-		end
-	end
+    local runScene = cc.Director:getInstance():getRunningScene()
+    if nil ~= runScene then
+        local filter = runScene:getChildByName(TOUCH_FILTER_NAME)
+        if nil ~= filter then
+            filter:stopAllActions()
+            filter:removeFromParent()
+        end
+    end
 end
 
 return Utils

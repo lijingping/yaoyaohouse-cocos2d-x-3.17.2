@@ -39,8 +39,9 @@ function LoginView:ctor(callBack)
 				Utils:writeConfigfile()
 
 				App:enterScene("MainScene")
+			else
+				return Tips:create("账号或密码错误，请重新输入")
 			end
-			return Tips:create("账号或密码错误，请重新输入")
 		end
 	end);
 
@@ -89,6 +90,12 @@ function LoginView:ctor(callBack)
 			door:setTexture(string.format(doorRes, BillData.door))
 
 			Utils:writeConfigfile()
+		end
+	end);
+
+	self.Panel_bg:getChildByName("exit"):addTouchEventListener(function(sender, event)
+		if event == ccui.TouchEventType.ended then
+			os.exit()
 		end
 	end);
 end

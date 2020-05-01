@@ -18,6 +18,8 @@ end)
 function MainView:ctor(params)
 	params = params or {}
 
+	self:enableNodeEvents();
+
 	local BillDataFile = WRITABLE_PATH .. BILL_DATA_NAME
 	if fileUtils:isFileExist(BillDataFile) == false and fileUtils:createDirectory(WRITABLE_PATH) then
 		if copyFile(BILL_DATA_NAME) then
@@ -55,7 +57,10 @@ function MainView:ctor(params)
 		["pay"] = self.Panel_bg:getChildByName("pay")
 	}
 
-	self._node["pay"].pay = (self._node["pay"]:getTitleText() == "PAY_YES" and "1" or "0")
+	local pay = "0"
+	self._node["pay"].pay = pay
+	self._node["pay"]:setTitleText(pay == "1" and PAY_YES or PAY_NO)
+
 	self._node["modifyDate"]:setText(OS_DATE("%Y/%m/%d-%H:%M:%S"))
 
 	local data = string.gsub(OS_DATE("%Y/%m/%d"), "/0","/")
@@ -88,9 +93,9 @@ function MainView:ctor(params)
 
 	self.Panel_bg:getChildByName("back"):addTouchEventListener(function(sender, event)
 		if event == ccui.TouchEventType.ended then
-			require("app.views.LoginView"):create(function()
-					require("app.views.MainView"):create():addTo(self);
-			end):addTo(display.getRunningScene());
+			-- require("app.views.LoginView"):create(function()
+			-- 		require("app.views.MainView"):create():addTo(self);
+			-- end):addTo(display.getRunningScene());
 
 			App:enterScene("LoginScene")		
 		end
@@ -98,14 +103,16 @@ function MainView:ctor(params)
 
 	self.Panel_bg:getChildByName("help"):addTouchEventListener(function(sender, event)
 		if event == ccui.TouchEventType.ended then
-            require("app.views.HelpView"):create({mainView=self}):addTo(display.getRunningScene())
+            -- require("app.views.HelpView"):create({mainView=self}):addTo(display.getRunningScene())
+            App:enterScene("HelpScene")
 		end
 	end)
 
 	self.Panel_bg:getChildByName("pay"):addTouchEventListener(function(sender, event)
 		if event == ccui.TouchEventType.ended then
-			self._node["pay"].pay = (self._node["pay"].pay == "1" and "0" or "1")
-			self._node["pay"]:setTitleText((self._node["pay"].pay == "1" and PAY_YES or PAY_NO))
+			local pay = self._node["pay"].pay == "1" and "0" or "1"
+			self._node["pay"].pay = pay
+			self._node["pay"]:setTitleText(pay == "1" and PAY_YES or PAY_NO)
 
 			self.isModify = true
 		end
@@ -115,28 +122,33 @@ function MainView:ctor(params)
 		if event == ccui.TouchEventType.ended then
 			local houseNoTable = string_split(self._node["houseNo"]:getText(),"-") or {}
 			local filePath = houseNoTable[1] .. OS_DATE("_%Y_%m_%d_%H_%M_%S.png")
-			--第1种方法
+			
+			local framesize = cc.Director:getInstance():getOpenGLView():getFrameSize()
+	    	local area = cc.rect(0, 0, framesize.width, framesize.height)
+
 			Utils:popupTouchFilter(0, false)
             captureScreenWithArea(area, filePath, function(ok, savepath)         
                 if ok then
-	    			local luaj = require "cocos.cocos2d.luaj"
-			   		local ok,ret = luaj.callStaticMethod("org/cocos2dx/lua/AppActivity"
-			   			,"saveImgToSystemGallery",{savepath, filePath},"(Ljava/lang/String;Ljava/lang/String;)V")
-
+                	if device.platform == "android" then
+		    			local luaj = require "cocos.cocos2d.luaj"
+				   		local ok,ret = luaj.callStaticMethod("org/cocos2dx/lua/AppActivity"
+				   			,"saveImgToSystemGallery",{savepath, filePath},"(Ljava/lang/String;Ljava/lang/String;)V")
+				   	end
                 end
                 self:runAction(cc.Sequence:create(cc.DelayTime:create(3), cc.CallFunc:create(function()
                     Utils:dismissTouchFilter()
                 end)))
             end)
-			--第2种方法
-			local luaj = require "cocos.cocos2d.luaj"
-	   		local ok,ret = luaj.callStaticMethod("org/cocos2dx/lua/AppActivity"
-	   			,"shoot",{filePath},"(Ljava/lang/String;)V")
 		end
 	end)
+end
 
-    self:findLineStr();
-	--self:readLineByID(params.str, params.id)
+function MainView:onEnter()
+	if self._id then
+		self:readLineByID(nil, self._id)
+	else
+		self:findLineStr()
+	end
 end
 
 function MainView:getNumber(name)

@@ -53,6 +53,8 @@ set(GAME_HEADER
     ${RUNTIME_SRC_ROOT}/Classes/AppDelegate.h
     ${RUNTIME_SRC_ROOT}/Classes/CCPomelo.h
     ${RUNTIME_SRC_ROOT}/Classes/CSVReader.h
+    ${RUNTIME_SRC_ROOT}/Classes/QR_Encode.h
+    ${RUNTIME_SRC_ROOT}/Classes/QrNode.h
     ${RUNTIME_SRC_ROOT}/Classes/lua-bindings/lua_pomelo_auto.hpp
     ${RUNTIME_SRC_ROOT}/Classes/include/ClientKernel.h
     ${RUNTIME_SRC_ROOT}/Classes/include/Define.h
@@ -65,6 +67,8 @@ set(GAME_SOURCE
     ${RUNTIME_SRC_ROOT}/Classes/AppDelegate.cpp
     ${RUNTIME_SRC_ROOT}/Classes/CCPomelo.cpp
     ${RUNTIME_SRC_ROOT}/Classes/CSVReader.cpp
+    ${RUNTIME_SRC_ROOT}/Classes/QR_Encode.cpp
+    ${RUNTIME_SRC_ROOT}/Classes/QrNode.cpp
     ${RUNTIME_SRC_ROOT}/Classes/lua-bindings/lua_pomelo_auto.cpp
     ${RUNTIME_SRC_ROOT}/Classes/src/ClientKernel.cpp
     ${RUNTIME_SRC_ROOT}/Classes/src/DownAsset.cpp
