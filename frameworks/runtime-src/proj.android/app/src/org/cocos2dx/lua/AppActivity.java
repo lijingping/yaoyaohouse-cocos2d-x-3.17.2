@@ -33,7 +33,9 @@ import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.view.View;
 import android.provider.MediaStore;
+
 import org.cocos2dx.lib.Cocos2dxActivity;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -54,12 +56,11 @@ public class AppActivity extends Cocos2dxActivity{
             // Don't need to finish it again since it's finished in super.onCreate .
             return;
         }
+        instance = this;
 
         // DO OTHER INITIALIZATION BELOW
         
-        instance = this;
     }
-
     public static String getSDCardDocPath()
     {
         File file = instance.getExternalFilesDir(null);
@@ -69,44 +70,24 @@ public class AppActivity extends Cocos2dxActivity{
 
         return instance.getFilesDir().getAbsolutePath();
     }
-        
-    //install apk
-    public static void installClient(String apkPath)
-    {       
-        if(!"".equals(apkPath))
-        {
-            File apkFile = new File(apkPath);
-            if (null != apkFile && apkFile.exists()) 
-            {
-                Intent installIntent = new Intent(Intent.ACTION_VIEW);
-                installIntent.setDataAndType(Uri.fromFile(apkFile), "application/vnd.android.package-archive");
-                instance.startActivity(installIntent);
-            }
-        }
-    }
-    
-    //自动启动
-    public static void restart()
+    public static void getCsvFileIntent(String path)
     {
-        instance.restartApp();
-    }
-    public void restartApp()
-    {
-        finish();
-        Intent i = getBaseContext().getPackageManager().getLaunchIntentForPackage(getBaseContext().getPackageName());  
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);  
-        startActivity(i);
-        android.os.Process.killProcess(android.os.Process.myPid());
-    }
-    public static Intent getCsvFileIntent(String Path)  
-    {  
-        File file = new File(Path);
+        /*
+        File file = new File(path);  
         Intent intent = new Intent("android.intent.action.VIEW");  
         intent.addCategory("android.intent.category.DEFAULT");  
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);  
         Uri uri = Uri.fromFile(file);  
-        intent.setDataAndType(uri, "text/csv");  
-        return intent;  
+        intent.setDataAndType(uri, "text/csv");
+        instance.startActivity(intent);
+        */
+        Intent intent = new Intent();
+        File file = new File(path);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.setDataAndType(Uri.fromFile(file), "text/csv");
+        instance.startActivity(intent);
     }
 
     // 获取指定Activity的截屏，保存到png文件
@@ -171,13 +152,14 @@ public class AppActivity extends Cocos2dxActivity{
     }
  
     // 程序入口
-    public static void shoot(final String path, final String filename) {
-        savePic(takeScreenShot(instance), path + filename);
+    public static void shoot(final String filename) {
+        final String path = getSDCardDocPath();
+        savePic(takeScreenShot(instance), path + "/" + filename);
         // 最后通知图库更新
         instance.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + path)));
 
         Intent intent  = new Intent(Intent.ACTION_SEND);
-        File file = new File(path + filename);
+        File file = new File(path + "/" + filename);
         intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
         intent.setType("image/jpeg");
         Intent chooser = Intent.createChooser(intent, "Share screen shot");
