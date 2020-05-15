@@ -10,6 +10,15 @@
     <Filter Include="resource">
       <UniqueIdentifier>{2d1d0979-58cd-4ab6-b91c-13650158f1fa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\include_battle">
+      <UniqueIdentifier>{c0c72486-3ddf-4edf-a9e5-8cd5b8ae237a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\src_battle">
+      <UniqueIdentifier>{d4920c85-5a5a-4283-b5eb-7ee0ef8659e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\lua-bindings">
+      <UniqueIdentifier>{5ca4384d-941e-4622-ab3c-045ed08ea5f6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
@@ -26,6 +35,99 @@
     <ClInclude Include="targetver.h">
       <Filter>win32</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\export.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\include\BaseData.h">
+      <Filter>Classes\include_battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\include\Battle.h">
+      <Filter>Classes\include_battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\include\Bullet.h">
+      <Filter>Classes\include_battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\include\BulletBase.h">
+      <Filter>Classes\include_battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\include\BulletMgr.h">
+      <Filter>Classes\include_battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\include\BulletNormal.h">
+      <Filter>Classes\include_battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\include\ClientKernel.h">
+      <Filter>Classes\include_battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\include\CommonData.h">
+      <Filter>Classes\include_battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\include\Define.h">
+      <Filter>Classes\include_battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\include\DownAsset.h">
+      <Filter>Classes\include_battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\include\Event.h">
+      <Filter>Classes\include_battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\include\Fort.h">
+      <Filter>Classes\include_battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\include\FortMgr.h">
+      <Filter>Classes\include_battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\include\json_batchallocator.h">
+      <Filter>Classes\include_battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\include\MCKernel.h">
+      <Filter>Classes\include_battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\include\MobileClientKernel.h">
+      <Filter>Classes\include_battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\include\Player.h">
+      <Filter>Classes\include_battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\include\Ship.h">
+      <Filter>Classes\include_battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\include\Tool.h">
+      <Filter>Classes\include_battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\include\UnZipAsset.h">
+      <Filter>Classes\include_battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CCPomelo.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\include\stdafx.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\lua-bindings\lua_pomelo_auto.hpp">
+      <Filter>Classes\lua-bindings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\include\DataMgr.h">
+      <Filter>Classes\include_battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\include\DataStruct.h">
+      <Filter>Classes\include_battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\include\EnergyBody.h">
+      <Filter>Classes\include_battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\include\Weapon.h">
+      <Filter>Classes\include_battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\include\WeaponBase.h">
+      <Filter>Classes\include_battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\include\WeaponMgr.h">
+      <Filter>Classes\include_battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\include\MoveBehavior.h">
+      <Filter>Classes\include_battle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -38,6 +140,93 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>win32</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\export.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\src\BaseData.cpp">
+      <Filter>Classes\src_battle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\src\Battle.cpp">
+      <Filter>Classes\src_battle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\src\Bullet.cpp">
+      <Filter>Classes\src_battle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\src\BulletBase.cpp">
+      <Filter>Classes\src_battle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\src\BulletMgr.cpp">
+      <Filter>Classes\src_battle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\src\BulletNormal.cpp">
+      <Filter>Classes\src_battle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\src\Fort.cpp">
+      <Filter>Classes\src_battle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\src\FortMgr.cpp">
+      <Filter>Classes\src_battle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\src\Player.cpp">
+      <Filter>Classes\src_battle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\src\Ship.cpp">
+      <Filter>Classes\src_battle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\src\ClientKernel.cpp">
+      <Filter>Classes\src_battle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\src\DownAsset.cpp">
+      <Filter>Classes\src_battle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\src\json_reader.cpp">
+      <Filter>Classes\src_battle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\src\json_value.cpp">
+      <Filter>Classes\src_battle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\src\json_writer.cpp">
+      <Filter>Classes\src_battle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\src\MCKernel.cpp">
+      <Filter>Classes\src_battle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\src\MobileClientKernel.cpp">
+      <Filter>Classes\src_battle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\src\stdafx.cpp">
+      <Filter>Classes\src_battle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\src\Tool.cpp">
+      <Filter>Classes\src_battle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\CCPomelo.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\lua-bindings\lua_pomelo_auto.cpp">
+      <Filter>Classes\lua-bindings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\src\DataMgr.cpp">
+      <Filter>Classes\src_battle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\src\DataStruct.cpp">
+      <Filter>Classes\src_battle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\src\EnergyBody.cpp">
+      <Filter>Classes\src_battle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\src\Weapon.cpp">
+      <Filter>Classes\src_battle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\src\WeaponBase.cpp">
+      <Filter>Classes\src_battle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\src\WeaponMgr.cpp">
+      <Filter>Classes\src_battle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\src\MoveBehavior.cpp">
+      <Filter>Classes\src_battle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
@@ -46,5 +235,16 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\game.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Classes\src\json_internalarray.inl">
+      <Filter>Classes\src_battle</Filter>
+    </None>
+    <None Include="..\Classes\src\json_internalmap.inl">
+      <Filter>Classes\src_battle</Filter>
+    </None>
+    <None Include="..\Classes\src\json_valueiterator.inl">
+      <Filter>Classes\src_battle</Filter>
+    </None>
   </ItemGroup>
 </Project>

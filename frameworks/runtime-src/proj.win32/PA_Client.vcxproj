@@ -72,7 +72,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\Classes;$(ProjectDir)..\Classes\runtime;$(ProjectDir)..\Classes\protobuf-lite;$(EngineRoot)external\win32-specific\zlib\include;$(EngineRoot)external;$(EngineRoot)external\lua\lua;$(EngineRoot)external\lua\tolua;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)external\curl\include\win32;$(EngineRoot)extensions;$(EngineRoot)tools\simulator\libsimulator\lib;$(EngineRoot)tools\simulator\libsimulator\lib\protobuf-lite;$(EngineRoot);%(AdditionalIncludeDirectories);$(_COCOS_HEADER_WIN32_BEGIN);$(_COCOS_HEADER_WIN32_END)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\Classes\src;$(ProjectDir)..\Classes\include;$(ProjectDir)..\Classes;$(ProjectDir)..\Classes\runtime;$(ProjectDir)..\Classes\protobuf-lite;$(EngineRoot)external\win32-specific\zlib\include;$(EngineRoot)external;$(EngineRoot)external\lua\lua;$(EngineRoot)external\lua\tolua;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)external\curl\include\win32;$(EngineRoot)extensions;$(EngineRoot)tools\simulator\libsimulator\lib;$(EngineRoot)tools\simulator\libsimulator\lib\protobuf-lite;$(EngineRoot);%(AdditionalIncludeDirectories);$(_COCOS_HEADER_WIN32_BEGIN);$(_COCOS_HEADER_WIN32_END);$(EngineRoot)cocos\libpomelo2\deps\uv\include;$(EngineRoot)cocos\libpomelo2\include;$(EngineRoot)cocos\libpomelo2\deps\openssl\openssl;$(EngineRoot)cocos\libpomelo2\src;$(EngineRoot)external\unzip</AdditionalIncludeDirectories>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
@@ -90,8 +90,8 @@
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories);$(_COCOS_LIB_PATH_WIN32_BEGIN);$(_COCOS_LIB_PATH_WIN32_END)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libcurl.lib;%(AdditionalDependencies);$(_COCOS_LIB_WIN32_BEGIN);$(_COCOS_LIB_WIN32_END)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories);$(_COCOS_LIB_PATH_WIN32_BEGIN);$(_COCOS_LIB_PATH_WIN32_END);$(SolutionDir)..\..\cocos2d-x\cocos\libpomelo2\Default\lib;$(SolutionDir)..\..\cocos2d-x\cocos\external\curl\prebuilt\win32</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ws2_32.lib;IPHLPAPI.lib;Psapi.lib;libpomelo2.lib;libuv.lib;openssl.lib;libcurl.lib;websockets.lib;%(AdditionalDependencies);$(_COCOS_LIB_WIN32_BEGIN);$(_COCOS_LIB_WIN32_END)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
       <ProgramDatabaseFile>$(ProjectDir)../../../simulator/win32/$(TargetName).pdb</ProgramDatabaseFile>
       <OutputFile>$(ProjectDir)../../../simulator/win32/$(TargetName)$(TargetExt)</OutputFile>
@@ -194,6 +194,37 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\Resources\sr
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
+    <ClInclude Include="..\Classes\CCPomelo.h" />
+    <ClInclude Include="..\Classes\export.h" />
+    <ClInclude Include="..\Classes\include\BaseData.h" />
+    <ClInclude Include="..\Classes\include\Battle.h" />
+    <ClInclude Include="..\Classes\include\Bullet.h" />
+    <ClInclude Include="..\Classes\include\BulletBase.h" />
+    <ClInclude Include="..\Classes\include\BulletMgr.h" />
+    <ClInclude Include="..\Classes\include\BulletNormal.h" />
+    <ClInclude Include="..\Classes\include\ClientKernel.h" />
+    <ClInclude Include="..\Classes\include\CommonData.h" />
+    <ClInclude Include="..\Classes\include\DataMgr.h" />
+    <ClInclude Include="..\Classes\include\DataStruct.h" />
+    <ClInclude Include="..\Classes\include\Define.h" />
+    <ClInclude Include="..\Classes\include\DownAsset.h" />
+    <ClInclude Include="..\Classes\include\EnergyBody.h" />
+    <ClInclude Include="..\Classes\include\Event.h" />
+    <ClInclude Include="..\Classes\include\Fort.h" />
+    <ClInclude Include="..\Classes\include\FortMgr.h" />
+    <ClInclude Include="..\Classes\include\json_batchallocator.h" />
+    <ClInclude Include="..\Classes\include\MCKernel.h" />
+    <ClInclude Include="..\Classes\include\MobileClientKernel.h" />
+    <ClInclude Include="..\Classes\include\MoveBehavior.h" />
+    <ClInclude Include="..\Classes\include\Player.h" />
+    <ClInclude Include="..\Classes\include\Ship.h" />
+    <ClInclude Include="..\Classes\include\stdafx.h" />
+    <ClInclude Include="..\Classes\include\Tool.h" />
+    <ClInclude Include="..\Classes\include\UnZipAsset.h" />
+    <ClInclude Include="..\Classes\include\Weapon.h" />
+    <ClInclude Include="..\Classes\include\WeaponBase.h" />
+    <ClInclude Include="..\Classes\include\WeaponMgr.h" />
+    <ClInclude Include="..\Classes\lua-bindings\lua_pomelo_auto.hpp" />
     <ClInclude Include="main.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SimulatorWin.h" />
@@ -202,6 +233,35 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\Resources\sr
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="..\Classes\CCPomelo.cpp" />
+    <ClCompile Include="..\Classes\export.cpp" />
+    <ClCompile Include="..\Classes\lua-bindings\lua_pomelo_auto.cpp" />
+    <ClCompile Include="..\Classes\src\BaseData.cpp" />
+    <ClCompile Include="..\Classes\src\Battle.cpp" />
+    <ClCompile Include="..\Classes\src\Bullet.cpp" />
+    <ClCompile Include="..\Classes\src\BulletBase.cpp" />
+    <ClCompile Include="..\Classes\src\BulletMgr.cpp" />
+    <ClCompile Include="..\Classes\src\BulletNormal.cpp" />
+    <ClCompile Include="..\Classes\src\ClientKernel.cpp" />
+    <ClCompile Include="..\Classes\src\DataMgr.cpp" />
+    <ClCompile Include="..\Classes\src\DataStruct.cpp" />
+    <ClCompile Include="..\Classes\src\DownAsset.cpp" />
+    <ClCompile Include="..\Classes\src\EnergyBody.cpp" />
+    <ClCompile Include="..\Classes\src\Fort.cpp" />
+    <ClCompile Include="..\Classes\src\FortMgr.cpp" />
+    <ClCompile Include="..\Classes\src\json_reader.cpp" />
+    <ClCompile Include="..\Classes\src\json_value.cpp" />
+    <ClCompile Include="..\Classes\src\json_writer.cpp" />
+    <ClCompile Include="..\Classes\src\MCKernel.cpp" />
+    <ClCompile Include="..\Classes\src\MobileClientKernel.cpp" />
+    <ClCompile Include="..\Classes\src\MoveBehavior.cpp" />
+    <ClCompile Include="..\Classes\src\Player.cpp" />
+    <ClCompile Include="..\Classes\src\Ship.cpp" />
+    <ClCompile Include="..\Classes\src\stdafx.cpp" />
+    <ClCompile Include="..\Classes\src\Tool.cpp" />
+    <ClCompile Include="..\Classes\src\Weapon.cpp" />
+    <ClCompile Include="..\Classes\src\WeaponBase.cpp" />
+    <ClCompile Include="..\Classes\src\WeaponMgr.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SimulatorWin.cpp" />
     <ClCompile Include="stdafx.cpp" />
@@ -215,7 +275,9 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\Resources\sr
   <ItemGroup>
     <ProjectReference Include="..\..\cocos2d-x\cocos\2d\libcocos2d.vcxproj">
       <Project>{98a51ba8-fc3a-415b-ac8f-8c7bd464e93e}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\cocos2d-x\cocos\libpomelo2\libpomelo2.vcxproj">
+      <Project>{7033137c-14a2-469f-0d11-d545bded8736}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\cocos2d-x\cocos\scripting\lua-bindings\proj.win32\libluacocos2d.vcxproj">
       <Project>{9f2d6ce6-c893-4400-b50c-6db70cc2562f}</Project>
@@ -223,6 +285,11 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\Resources\sr
     <ProjectReference Include="..\..\cocos2d-x\tools\simulator\libsimulator\proj.win32\libsimulator.vcxproj">
       <Project>{001b324a-bb91-4e83-875c-c92f75c40857}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Classes\src\json_internalarray.inl" />
+    <None Include="..\Classes\src\json_internalmap.inl" />
+    <None Include="..\Classes\src\json_valueiterator.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
